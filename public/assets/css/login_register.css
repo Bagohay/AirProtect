@@ -1,0 +1,448 @@
+:root {
+    --primary-color: #1a237e;
+    --secondary-color: #ff3d00;
+    --light-gray: #f5f5f5;
+    --border-radius: 0.375rem;
+    --panel-transition: transform 0.8s ease-in-out;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+header {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.brand-red {
+    color: #ff3d00;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container {
+    flex: 1;
+    max-width: 1000px;
+    margin: 2rem auto;
+    position: relative;
+    height: 600px;
+    perspective: 1000px;
+}
+
+.container-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+}
+
+.login-container.flip .container-inner {
+    transform: rotateY(180deg);
+}
+
+.panel {
+    
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.register-panel {
+    padding-top: -10%;
+    transform: rotateY(180deg);
+}
+
+.left-panel, .right-panel {
+    flex: 1;
+    padding: 3rem 2rem;
+    flex-direction: column;
+}
+
+.left-panel {
+    background-color: var(--primary-color);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.right-panel {
+    background-color: white;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.snowflake-icon {
+    font-size: 5rem;
+    opacity: 0.2;
+    margin-top: 1rem;
+}
+
+.fan-icon {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.2;
+    bottom: 10%;
+    right: 15%;
+}
+
+.fan-icon-2 {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.2;
+    bottom: 30%;
+    right: 25%;
+}
+
+.fan-icon-3 {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.2;
+    top: 20%;
+    right: 20%;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(26, 35, 126, 0.1);
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #e53935;
+    border-color: #e53935;
+}
+
+.btn-outline-secondary {
+    border-color: #ddd;
+    color: #555;
+    background-color: white;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+    color: #333;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    color: #777;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.divider span {
+    padding: 0 1rem;
+    font-size: 0.875rem;
+}
+
+.form-text {
+    color: #777;
+}
+
+.toggle-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.toggle-link:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: var(--light-gray);
+    padding: 1rem 0;
+    font-size: 0.875rem;
+    color: #666;
+    border-top: 1px solid #e0e0e0;
+}
+
+.social-icons a {
+    color: #666;
+    margin-left: 1rem;
+    transition: color 0.2s;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.feature-list li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.feature-list i {
+    margin-right: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.company-tagline {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.trusted-by {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-top: 2rem;
+}
+
+.trusted-by p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.company-logos {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.company-logos span {
+    opacity: 0.6;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .panel {
+        flex-direction: column;
+    }
+
+    .left-panel, .right-panel {
+        padding-top: 20;
+        width: 100%;
+        padding: 2rem 1.5rem;
+    }
+
+    .left-panel {
+        text-align: center;
+    }
+}
+
+/* Enhancement: Input with icons */
+.input-icon-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+    color: #777;
+}
+
+.input-with-icon {
+    padding-left: 2.5rem;
+}
+
+/* Enhancement: Password visibility toggle */
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+    color: #777;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Custom decoration */
+.wave-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    opacity: 0.2;
+}
+
+.notification-badge {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.service-highlights {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.service-highlight {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.service-highlight i {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.service-highlight p {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+/* New styles for animation */
+.toggle-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.toggle-button:hover {
+    background-color: #e53935;
+}
+
+/* Form fade animation */
+.form-fade {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.form-fade.fade-out {
+    opacity: 0;
+}
+
+/* Progress indicator for registration */
+.progress-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.step::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ddd;
+    z-index: -1;
+}
+
+.step:last-child::after {
+    display: none;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ddd;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+.step.active .step-number {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.step.completed .step-number {
+    background-color: #4caf50;
+    color: white;
+}
+
+.step-label {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.step.active .step-label {
+    color: #333;
+    font-weight: 500;
+}
