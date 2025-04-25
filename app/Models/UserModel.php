@@ -6,21 +6,22 @@ use App\Models\BaseModel;
 use Config\Database;
 
 class UserModel extends BaseModel{
-    protected $table = 'USERS';
+    protected $table = 'USER_ACCOUNT';
+
+    protected $primaryKey= 'USER_ID';
 
     protected $fillable = [
         'USER_PROFILE_URL',
         'USER_FIRST_NAME',
-        'USER_MIDDLE_NAME',
         'USER_LAST_NAME',
         'USER_EMAIL',
-        'USER_PASSWORD',
-        'ROLE_ID',
+        'USER_HASHED_PASSWORD',
+        'USER_PHONE_NUMBER',
+        'USER_ROLE_ID',
         'USER_IS_ACTIVE',   
         'USER_REMEMBER_TOKEN',
-        'USER_LAST_LOGIN',
         'USER_REMEMBER_TOKEN_EXPIRES_AT',
-        'USER_PHONE_NUMBER'
+        'USER_LAST_LOGIN'
     ];
 
     protected $timestamps = true;
@@ -38,41 +39,39 @@ class UserModel extends BaseModel{
 
     public function createUser(array $data)
     {
-        if (isset($data['user_password'])) {
-            $data['user_password'] = $this->hashPassword($data['user_password']);
+        if (isset($data['USER_HASHED_PASSWORD'])) {
+            $data['USER_HASHED_PASSWORD'] = $this->hashPassword($data['USER_HASHED_PASSWORD']);
         }
-
+    
         return $this->insert($data);
     }
     
-    //LOGIN PART
-    public function findByEmail($email){
-            return $this->select('USERS.*, ROLES.NAMES AS ROLE_NAME')
-                        ->join('ROLES', 'USERS.ROLE_ID','ROLES.ROLE_ID')
-                        ->where('USERS.USER_EMAIL = :EMAIL')
-                        ->bind(['EMAIL' => $email])
-                        ->first();
+    public function findByEmail($email)
+    {
+    return $this->select('USER_ACCOUNT.*, USER_ROLE.ROLE_NAME')
+                ->join('USER_ROLE', 'USER_ACCOUNT.USER_ROLE_ID', 'USER_ROLE.ROLE_ID')
+                ->where('USER_ACCOUNT.USER_EMAIL = :email')
+                ->bind(['email' => $email])
+                ->first();
     }
 
-    public function verifyPassword($password,$hash){
+    public function verifyPassword($password, $hash)
+    {
+        return password_verify($password, $hash);
+    }
 
-        return password_verify($password,$hash);
 
-    }  
-    //UPDATELASTLOGIN
-    public function updateLastLogin($userId){
+    public function updateLastLogin($userId)
+    {
         return $this->update(
             [
                 'USER_LAST_LOGIN' => date('Y-m-d H:i:s')
             ],
             "{$this->primaryKey} = :USER_ID",
-            ['USER_ID' =>$userId]
-            
+            ['USER_ID' => $userId]
         );
-
     }
-    //REMEMBER_TOKEN
-
+    
     public function generateRememberToken($userId, $days = 30)
     {
         $token = bin2hex(random_bytes(32));
@@ -80,11 +79,11 @@ class UserModel extends BaseModel{
 
         $this->update(
             [
-                'user_remember_token' => $token,
-                'user_remember_token_expires_at' => $expiresAt
+                'USER_REMEMBER_TOKEN' => $token,
+                'USER_REMEMBER_TOKEN_EXPIRES_AT' => $expiresAt
             ],
-            "{$this->primaryKey} = :id",
-            ['id' => $userId]
+            "{$this->primaryKey} = :USER_ID",
+            ['USER_ID' => $userId]
         );
 
         return $token;
@@ -92,12 +91,6 @@ class UserModel extends BaseModel{
 
 
 
-
-
-
-
-
-    
 }
 
 

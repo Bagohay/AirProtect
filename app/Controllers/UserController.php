@@ -7,7 +7,7 @@ use App\Controllers\BaseController;
 class UserController extends BaseController{
 
     public function user_dashboard(){
-        $this->render('User/dashboard');
+        $this->render('user/dashboard');
     }
 
 

@@ -50,7 +50,7 @@
                     <li class="nav-item"><a class="nav-link" href="#featured-products">Featured Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="#why-choose-us">Why Choose Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item"><a class="btn btn-danger ms-2" href="/auth">Login</a></li>
+                    <li class="nav-item"><a class="btn btn-danger ms-2" href="/auth/login">Login</a></li>
                     </ul>
                 </div>
             </div>
