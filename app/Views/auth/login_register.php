@@ -305,7 +305,7 @@
     <script src="/assets/js/form_handler.js"></script>
     <script>
         handleFormSubmission('loginFormElement','/auth/login');
-        handleFormSubmission('registerFormElement','/auth');
+        handleFormSubmission('registerFormElement','/auth/register');
     </script>
     
 </body>

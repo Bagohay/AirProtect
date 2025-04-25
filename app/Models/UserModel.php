@@ -16,7 +16,7 @@ class UserModel extends BaseModel{
         'USER_EMAIL',
         'USER_PASSWORD',
         'ROLE_ID',
-        'USER_IS_ACTIVE',
+        'USER_IS_ACTIVE',   
         'USER_REMEMBER_TOKEN',
         'USER_LAST_LOGIN',
         'USER_REMEMBER_TOKEN_EXPIRES_AT',
@@ -38,8 +38,8 @@ class UserModel extends BaseModel{
 
     public function createUser(array $data)
     {
-        if (isset($data['USER_PASSWORD'])) {
-            $data['USER_PASSWORD'] = $this->hashPassword($data['USER_PASSWORD']);
+        if (isset($data['user_password'])) {
+            $data['user_password'] = $this->hashPassword($data['user_password']);
         }
 
         return $this->insert($data);
@@ -80,8 +80,8 @@ class UserModel extends BaseModel{
 
         $this->update(
             [
-                'remember_token' => $token,
-                'remember_token_expires_at' => $expiresAt
+                'user_remember_token' => $token,
+                'user_remember_token_expires_at' => $expiresAt
             ],
             "{$this->primaryKey} = :id",
             ['id' => $userId]

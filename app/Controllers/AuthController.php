@@ -41,11 +41,11 @@ class AuthController extends BaseController
             return $this->jsonError("Invalid email or password");
         }
 
-        if($user['USER_DELETED_AT'] !== null){
+        if($user['user_delete_at'] !== null){
             return $this->jsonError('This account has been deactivated');
         }
 
-        if(!$this->userModel->verifyPassword($password,$user['USER_PASSWORD'])){
+        if(!$this->userModel->verifyPassword($password,$user['user_password'])){
             return $this->jsonError('Invalid email or password');
         }
         
@@ -57,24 +57,24 @@ class AuthController extends BaseController
 
         //GLOBAL THE VALUES 
 
-        $_SESSION['USER_ID']=$user['USER_ID'];
-        $_SESSION['PROFILE_URL']=$user['USER_PROFILE_URL'];
-        $_SESSION['FIRST_NAME']=$user['USER_FIRST_NAME'];
-        $_SESSION['MIDDLE_NAME'] = !empty($user['USER_MIDDLE_NAME']) 
-        ? strtoupper(substr($user['USER_MIDDLE_NAME'], 0, 1)) . '.' 
+        $_SESSION['user_id']=$user['user_id'];
+        $_SESSION['PROFILE_URL']=$user['user_profile_url'];
+        $_SESSION['FIRST_NAME']=$user['user_first_name'];
+        $_SESSION['MIDDLE_NAME'] = !empty($user['user_middle_name']) 
+        ? strtoupper(substr($user['user_middle_name'], 0, 1)) . '.' 
         : '';
-        $_SESSION['LAST_NAME']=$user['USER_LAST_NAME'];
-        $_SESSION['EMAIL']=$user['USER_EMAIL'];
-        $_SESSION['PHONE_NUMBER']=$user['USER_PHONE_NUMBER'];
-        $_SESSION['USER_ROLE']=$user['ROLE_NAME'] ?? "user";
-        $_SESSION['member_since'] = (new DateTime($user['USER_CREATED_AT']))->format('F j, Y');
+        $_SESSION['LAST_NAME']=$user['user_last_name'];
+        $_SESSION['EMAIL']=$user['user_email'];
+        $_SESSION['PHONE_NUMBER']=$user['user_email'];
+        $_SESSION['USER_ROLE']=$user['role_name'] ?? "Customer";
+        $_SESSION['member_since'] = (new DateTime($user['created_at']))->format('F j, Y');
 
         if($remember){
-            $token=$this->userModel->generateRememberToken($user['USER_ID'],30);
-            Cookie:: set('USER_REMEMBER_TOKEN',$token,30);
+            $token=$this->userModel->generateRememberToken($user['user_id'],30);
+            Cookie:: set('user_remember_token',$token,30);
         }
 
-        $role=$user['ROLE_NAME'] ?? '/';
+        $role=$user['role_name'] ?? '/';
         $redirectUrl= match($role){
             'Customer' =>'/User/dashboard',
             'Technician' =>'/technician/dashboard',
