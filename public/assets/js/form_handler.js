@@ -48,6 +48,16 @@ function handleFormSubmission(formId, actionUrl) {
                 modalElement.hide();
             }
 
+                        // If this is the registration form, flip to login panel after successful registration
+            // If this is the registration form, flip to login panel after successful registration
+            if (formId === 'registerFormElement' && response.data.success) {
+                // Flip to login panel after a short delay
+                setTimeout(() => {
+                    document.getElementById('loginContainer').classList.remove('flip');
+                }, 1500);
+                }
+
+
             // ✅ Reset the form
             form.reset();
 

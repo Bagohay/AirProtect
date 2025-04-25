@@ -90,7 +90,7 @@ class BaseController{
     protected function getJsonInput(): array {
         return json_decode(file_get_contents('php://input'), true) ?? [];
     }
-
+    
     protected function requireFields(array $fields, array $input): void {
         foreach ($fields as $field) {
             if (!isset($input[$field])) {
